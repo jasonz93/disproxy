@@ -1,0 +1,35 @@
+{
+  "name": "disproxy",
+  "version": "0.0.1",
+  "description": "A distribute proxy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonz93/disproxy.git"
+  },
+  "keywords": [
+    "Distribute",
+    "Proxy"
+  ],
+  "author": "Sihao Zhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jasonz93/disproxy/issues"
+  },
+  "homepage": "https://github.com/jasonz93/disproxy#readme",
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "node-etcd": "^5.0.3",
+    "proxy": "^0.2.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.16",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.2.0"
+  }
+}
