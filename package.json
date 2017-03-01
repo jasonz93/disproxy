@@ -2,10 +2,10 @@
   "name": "disproxy",
   "version": "0.0.1",
   "description": "A distribute proxy",
-  "main": "index.js",
+  "main": "libs/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "test": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -22,8 +22,8 @@
   },
   "homepage": "https://github.com/jasonz93/disproxy#readme",
   "dependencies": {
+    "etcd-cli": "~0.0.1",
     "lodash": "^4.17.4",
-    "node-etcd": "^5.0.3",
     "proxy": "^0.2.4"
   },
   "devDependencies": {

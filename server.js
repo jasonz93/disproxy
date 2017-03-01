@@ -7,7 +7,8 @@ const http = require('http');
 const proxy = require('proxy');
 const os = require('os');
 const _ = require('lodash');
-const Etcd = require('node-etcd');
+const Etcd = require('etcd-cli');
+const Heartbeat = require('./libs/Heartbeat');
 
 function buildOptions() {
     function getByPriority() {
@@ -65,15 +66,32 @@ let ip = detectAvailableIPs(options.ip_prefix);
 
 console.log('Your publish ip is', ip, 'or you can set it by environment variables.');
 
+
+
+
+
 const server = proxy(http.createServer());
 
-let etcd = new Etcd(options.etcd_host);
+let etcd = new Etcd.V2HTTPClient(options.etcd_host);
+
+let heartbeat = new Heartbeat(etcd, buildKey(ip), 30);
+
+process.on('SIGINT', () => {
+    console.log('SIGINT received.');
+    heartbeat.stop();
+    let etcdSync = etcd.sync();
+    etcdSync.remove(buildKey(ip));
+    server.close(() => {
+        process.exit();
+    });
+});
 
 server.listen(3128, () => {
     let port = server.address().port;
     console.log('Proxy server listening on port %d', port);
     etcd.set(buildKey(ip), JSON.stringify({
         type: 'http',
+        host: ip,
         port: port,
         upFrom: new Date().getTime()
     }), {
@@ -83,16 +101,6 @@ server.listen(3128, () => {
             return console.log('Failed to set proxy node record.', err);
         }
         console.log('Proxy node record has been set.', res);
+        heartbeat.start();
     });
-    let heartbeat = setInterval(() => {
-        etcd.raw('PUT', 'v2/keys' + buildKey(ip), null, {
-            ttl: 30,
-            refresh: true
-        }, (err, res) => {
-            if (err) {
-                return console.log('Failed to send heartbeat, this node will be offline.');
-            }
-            console.log('Heartbeat sent.', res);
-        });
-    }, 3000);
 });
