@@ -20,16 +20,37 @@ describe('Proxy selector test', () => {
         });
     });
 
-    it('Test selector', (done) => {
+    it('Start the selector', (done) => {
         selector.start(() => {
-            selector.select((err, host) => {
-                expect(err).to.be.equal(null);
-                expect(host).not.to.be.equal(null);
-                expect(host.host).not.to.be.equal(null);
-                expect(host.port).not.to.be.equal(null);
-                done();
-            });
+            done();
+        })
+    });
+
+    it('Stop the selector', () => {
+        selector.stop();
+    });
+
+    it('Start the selector in promise way', (done) => {
+        selector.startP().then(done).catch(done);
+    });
+
+    it('Test selector', (done) => {
+        selector.select((err, host) => {
+            expect(err).to.be.equal(null);
+            expect(host).not.to.be.equal(null);
+            expect(host.host).not.to.be.equal(null);
+            expect(host.port).not.to.be.equal(null);
+            done();
         });
+    });
+
+    it('Test select in promise way', (done) => {
+        selector.selectP().then((host) => {
+            expect(host).not.to.be.equal(null);
+            expect(host.host).not.to.be.equal(null);
+            expect(host.port).not.to.be.equal(null);
+            done();
+        }).catch(done);
     });
 
     it('Close proxy', (done) => {

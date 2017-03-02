@@ -1,6 +1,6 @@
 {
   "name": "disproxy",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A distribute proxy",
   "main": "libs/index.js",
   "bin": {
@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/jasonz93/disproxy#readme",
   "dependencies": {
+    "bluebird": "^3.4.7",
     "etcd-cli": "~0.0.1",
     "lodash": "^4.17.4",
     "proxy": "^0.2.4"
