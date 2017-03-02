@@ -11,7 +11,7 @@ describe('Proxy selector test', () => {
     let selector = new Selector('127.0.0.1:2379');
     let proxyProcess;
     it('Start proxy', (done) => {
-        proxyProcess = child_process.fork(path.join(__dirname, '..', 'server.js'), {silent: true});
+        proxyProcess = child_process.fork(path.join(__dirname, '..', 'bin', 'server'), {silent: true});
         proxyProcess.stdout.on('data', (data) => {
             data = data.toString();
             if (data.indexOf('Proxy node record has been set.') >= 0) {

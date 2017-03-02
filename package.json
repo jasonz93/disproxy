@@ -1,11 +1,14 @@
 {
   "name": "disproxy",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A distribute proxy",
   "main": "libs/index.js",
+  "bin": {
+    "disproxy": "bin/server"
+  },
   "scripts": {
     "test": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha",
-    "start": "node server.js"
+    "start": "node bin/server"
   },
   "repository": {
     "type": "git",
