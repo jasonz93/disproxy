@@ -9,6 +9,10 @@ class ProxyOnlineHandler extends BaseHandler {
         super(client);
     }
 
+    static getName() {
+        return 'PROXY_ONLINE';
+    }
+
     async handle(msg) {
         let proxy = await this.client.proxyModel.findById(msg.proxy_id);
         if (proxy) {

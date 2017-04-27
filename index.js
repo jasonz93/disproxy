@@ -84,3 +84,5 @@ class Client {
         return null;
     }
 }
+
+module.exports = Client;

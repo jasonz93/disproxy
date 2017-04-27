@@ -10,6 +10,7 @@ class ProxyNode {
         this.url = doc.protocol + '://' + internal ? doc.internal_ip : doc.external_ip + ':' + doc.port;
         this.mq = mq;
         this.bans = doc.bans;
+        this.type = doc.type;
     }
 
     async ban(url) {
@@ -17,7 +18,7 @@ class ProxyNode {
         let host = parsedUrl.hostname;
         let index = this.bans.indexOf(host);
         if (index < 0) {
-            this.bans.push(index);
+            this.bans.push(host);
         }
         await this.mq.send({
             type: 'BAN_REQUEST',

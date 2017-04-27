@@ -1,14 +1,10 @@
 {
   "name": "disproxy",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A distribute proxy",
-  "main": "libs/index.js",
-  "bin": {
-    "disproxy": "bin/server"
-  },
+  "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha",
-    "start": "node bin/server"
+    "test": "node_modules/.bin/istanbul cover node_modules/mocha/bin/_mocha"
   },
   "repository": {
     "type": "git",
@@ -27,6 +23,7 @@
   "dependencies": {
     "arguejs": "^0.2.3",
     "bluebird": "^3.4.7",
+    "disproxy-core": "^1.0.0",
     "klaw": "^1.3.1",
     "lodash": "^4.17.4",
     "mongoose": "^4.9.6"

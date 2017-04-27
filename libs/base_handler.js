@@ -14,3 +14,5 @@ class BaseHandler {
         throw new Error('Method not implemented.');
     }
 }
+
+module.exports = BaseHandler;
